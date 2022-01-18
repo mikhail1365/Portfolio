@@ -1,0 +1,305 @@
+@font-face {
+	font-family: "Conv_CALIFR";
+	src: url("../fonts/CALIFR.eot");
+	src: local("☺"), url("../fonts/CALIFR.woff") format("woff"), url("fonts/CALIFR.ttf") format("truetype"),
+		url("fonts/CALIFR.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+
+$time-delay-top: 0.5s;
+
+$inside-menu-bgcolor: rgba(67, 215, 235, 0.719);
+.inside-menu {
+	position: relative;
+	z-index: 1;
+	&:hover &__row {
+		background-color: $inside-menu-bgcolor;
+		color: blue;
+		font-weight: 700;
+		position: absolute;
+		top: 33px;
+		left: 0;
+		display: flex;
+		width: 100%;
+		justify-content: space-around;
+	}
+	position: relative;
+	&__row {
+		display: none;
+	}
+	&__column {
+		flex: 1 1 auto;
+	}
+	&__element {
+		margin-top: 1px;
+		width: 100%;
+		flex: 1 1 35px;
+		padding: 8px 0;
+		outline: 1px solid black;
+		background-color: $inside-menu-bgcolor;
+		transition-duration: $time-delay-top;
+
+		&:hover {
+			@extend .hover-func;
+		}
+	}
+}
+
+.orange_box {
+	background-color: orange;
+	box-shadow: 0 2px 3px 0 blue;
+}
+
+header {
+	margin: 0 0 40px 0;
+	background: grey;
+}
+
+.hover-func {
+	background-color: rgba(17, 178, 199, 0.342);
+	color: blue;
+	position: relative;
+	top: 2px;
+	left: 2px;
+	transition: 1s;
+	transition-property: all;
+	@extend .orange_box;
+	background: orange;
+	font-family: "Conv_CALIFR";
+}
+
+$height-head: 55px;
+
+.menu {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	position: relative;
+	z-index: 2;
+	&__logo {
+		max-width: 15%;
+		overflow: hidden;
+		position: relative;
+		width: 100%;
+		height: 100%;
+		z-index: 2;
+		overflow: hidden;
+		position: relative;
+		padding: 0 0 $height-head 0;
+		img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+		}
+	}
+
+	&__bar {
+		justify-self: start;
+		padding: 0 5px;
+		display: flex;
+		justify-content: space-between;
+		@include bord;
+		height: $height-head;
+		&__panel div {
+			display: none;
+		}
+	}
+	&__row {
+		display: flex;
+		text-align: center;
+		align-self: center;
+	}
+	&__element {
+		height: 35px;
+		padding: 5px 5px;
+		background-color: $inside-menu-bgcolor;
+		flex: 1 1 auto;
+		border: 1px solid black;
+		margin-right: 0px;
+		font-style: italic;
+		&:hover {
+			@extend .hover-func;
+		}
+		& a {
+			color: blue;
+			font-weight: 500;
+			font-family: "Conv_CALIFR";
+			font-size: 24px;
+		}
+	}
+	&__title {
+		margin-top: 80px;
+	}
+}
+
+.header {
+	width: 100%;
+	height: $height-head;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 5;
+	// @include bord($color: green);
+}
+
+$bef-col: rgba(251, 10, 10, 0.728);
+$bef-col-opaque: rgba(251, 10, 10, 0.728);
+header:before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: $bef-col;
+	transition-duration: 1s;
+	transition-property: all;
+}
+
+
+.menu__burger {
+	display: none;
+	min-width: 35px;
+	min-height: 35px;
+}
+$pbot: 70px;
+
+@media (max-width: 767px) {
+	.container {
+		min-width: 100%;
+	}
+	.menu {
+		height: 100%;
+		&__row {
+			transition-duration: 1s;
+			position: fixed;
+			top: -100%;
+			left: 20px;
+			width: 100%;
+			padding: 0 0 0 0;
+		
+			flex-direction: column;
+			width: 45%;
+			z-index: 500;
+			background-color: $bgColor;
+		}
+
+		&__element {
+			&:last-child {
+			}
+			background-color: $bgColor;
+			height: auto;
+			padding: 5px;
+			margin: 0 0 1px 0;
+			a {
+				text-transform: uppercase;
+				font-weight: 700;
+
+				font-size: 15px;
+			}
+		}
+	}
+
+	.inside-menu {
+
+		&:hover &__row {
+			top: 0;
+			left: 100%;
+		}
+		&__column {
+			height: 100%;
+			background-color: $bgColor;
+		}
+		&__element {
+			background-color: $bgColor;
+
+			height: 100%;
+		}
+	}
+
+	.header {
+		height: $height-head;
+		margin-bottom: 40px;
+	}
+	$perc: 30%;
+	.menu__logo {
+		margin-left: 15px;
+	}
+	.menu__title {
+		display: none;
+	}
+	$burg-height: 35px;
+	.menu__bar {
+		padding: 0;
+	}
+
+	.menu__burger {
+		display: flex;
+		align-self: center;
+		z-index: 3;
+		display: block;
+		position: relative;
+		right: 15px;
+		width: 35px;
+		height: 35px;
+		&:before,
+		&:after {
+			content: "";
+			background-color: rgb(0, 0, 0);
+			position: absolute;
+			width: 100%;
+			height: 2px;
+			right: 0;
+			transition-duration: 1s;
+		}
+		&:before {
+			top: 0;
+		}
+
+		&:after {
+			bottom: 0;
+		}
+		span {
+			transition-duration: 1s;
+			background-color: rgb(0, 0, 0);
+			position: absolute;
+			width: 100%;
+			height: 2px;
+			left: 0;
+			top: $burg-height/2;
+		}
+	}
+	.menu__burger-active {
+		&:before {
+			top: 50%;
+			transform: rotate(45deg);
+		}
+		&:after {
+			top: 50%;
+			transform: rotate(-45deg);
+		}
+		span {
+			display: none;
+		}
+	}
+
+	.menu__row-active {
+		height: 20px;
+		top: $height-head + 3px;
+		padding: 0 0 $pbot 0;
+	}
+	.header-active {
+
+		margin-bottom: $pbot + 50px;
+		&:before{
+			background-color: rgb(216, 50, 50);
+			height: 200px;
+		}
+	}
+}
+
+

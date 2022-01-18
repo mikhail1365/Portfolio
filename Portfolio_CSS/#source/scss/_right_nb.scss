@@ -1,0 +1,112 @@
+$f-bas: 200px;
+$img_wid: 130px;
+.right-navbar {
+	margin-top: 30px;
+	flex: 0 1 25%;
+	&__column {
+		display: flex;
+		flex-direction: column;
+		flex: 0 1 auto;
+	}
+
+	&__row {
+		flex: 0 0 auto;
+		display: flex;
+		flex-direction: column;
+		outline: 2px solid black;
+	}
+
+	&__title {
+		font-family: " Verdana";
+		font-style: italic;
+		background-color: $inside-menu-bgcolor;
+		font-weight: 600;
+		font-size: 22px;
+		text-align: center;
+		padding: 12px;
+		transition-duration: $time-delay-main;
+
+		&:hover {
+			background-color: orange;
+		}
+
+		&-1:hover ~ .right-navbar__item-1 {
+			display: block;
+			background-color: $inside-menu-bgcolor;
+		}
+
+		&-2:hover ~ .right-navbar__item-2 {
+			display: flex;
+			background-color: $inside-menu-bgcolor;
+		}
+
+		&-3:hover ~ .right-navbar__item-3 {
+			display: block;
+			background-color: $inside-menu-bgcolor;
+		}
+		&-4:hover ~ .right-navbar__item-4 {
+			display: flex;
+			background-color: $inside-menu-bgcolor;
+		}
+	}
+
+	&__item {
+		transition-duration: $time-delay-main;
+		display: flex;
+		border: 1px solid black;
+		flex-direction: column;
+		display: none;
+	}
+	&__text {
+		font-size: 16px;
+		padding: 10px;
+		&-4 {
+			text-align: right;
+		}
+	}
+
+	&__img {
+		margin: 10px;
+		&-1 {
+			transition-duration: 1s;
+
+			width: $img_wid;
+			height: $img_wid;
+			background: url("../img/right_nav_1.jpg") center / contain no-repeat;
+			float: right;
+		}
+		&-2 {
+			flex: 0 0 $f-bas;
+			background: url("../img/right_nav_2.jpg") center / contain no-repeat;
+		}
+
+		&-3 {
+			width: $img_wid;
+			height: $img_wid;
+			float: left;
+			background: url("../img/right_nav_3.jpg") center / cover no-repeat;
+			margin-bottom: 10px;
+		}
+
+		&-4 {
+			flex: 0 0 $f-bas;
+			background: url("../img/right_nav_4.jpg") center / cover no-repeat;
+			margin-bottom: 10px;
+		}
+	}
+}
+
+@media (max-width: 1172px) {
+	.right-navbar__title-1:hover ~ .right-navbar__item-1 {
+		display: block;
+	}
+	.right-navbar__title-3:hover ~ .right-navbar__item-3 {
+		display: block;
+	}
+
+	.right-navbar__img-1,
+	.right-navbar__img-3 {
+		float: none;
+		width: auto;
+	}
+}

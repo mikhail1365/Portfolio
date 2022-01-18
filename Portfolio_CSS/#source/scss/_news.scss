@@ -1,0 +1,147 @@
+
+//! news
+.news {
+	z-index: 0;
+	margin: 30px 0;
+	&__items {
+		position: relative;
+		width: 100%;
+	}
+}
+.news-element {
+	display: flex;
+	height: 300px;
+	margin: -10px;
+	padding: 10px;
+	&__img {
+		padding: 10px;
+		width: 300px;
+		display: flex;
+		flex: 0 0 40%;
+	}
+	&__text {
+		font-size: 24px;
+		line-height: 34px;
+		padding: 20px;
+		flex: 0 1 70%;
+	}
+}
+
+@media (max-width: 752px) {
+	.news-element__text {
+		font-size: 20px;
+		line-height: 28px;
+		padding-top: 35px;
+	}
+}
+@media (max-width: 594px) {
+
+	.news-element__text {
+		padding-top: 65px;
+		font-size: 14px;
+		line-height: 20px;
+	}
+}
+@media (max-width: 432px) {
+	.film__img {
+		padding-left: 0;
+		height: 150px;
+	}
+	.world-cup {
+		flex-direction: column;
+	}
+	.news-element {
+		&__text {
+			padding-top: 10px;
+			font-size: 12px;
+		}
+	}
+}
+@media (max-width: 285px) {
+	.news-element__text div {
+		display: none;
+	}
+	.news-element__text {
+		font-size: 10px;
+		line-height: 16px;
+	}
+}
+
+@media (max-width: 220px) {
+	.news-element__text {
+		font-size: 6px;
+		line-height: 10px;
+	}
+}
+.film {
+	div div span {
+		font-weight: bold;
+	}
+	&__img {
+		background: url("../img/Royal_game.jfif") center / contain no-repeat;
+	}
+}
+
+.world-cup {
+	&__img {
+		background: url("../img/match.jpg") center / contain no-repeat;
+	}
+}
+
+@media (max-width: 310px) {
+	.world-cup__img {
+		background-position: 35px 0;
+	}
+}
+.item-hidden {
+	display: none;
+}
+.display-none {
+	display: none;
+}
+
+.btn-color-active {
+	background-color: rgba(100, 241, 123, 0.952);
+}
+.but-nav-bloat-color-passive {
+	background-color: $inside-menu-bgcolor;
+}
+
+.but-change {
+	position: absolute;
+	top: -25px;
+	right: 100px;
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;
+	border: 2px solid black;
+	&:hover {
+		box-shadow: 0 0 5px 4px orange;
+	}
+}
+
+@media (max-width: 594px) {
+	.but-change {
+		width: 30px;
+		height: 30px;
+		right: 60px;
+	}
+}
+@media (max-width: 382px) {
+	.but-change {
+		right: 20px;
+	}
+}
+
+@media (max-width: 351px) {
+	.but-change {
+		top: 20px;
+		right: 4px;
+	}
+}
+@media (max-width: 288px) {
+	.but-change {
+		top: -33px;
+		right: 4px;
+	}
+}
