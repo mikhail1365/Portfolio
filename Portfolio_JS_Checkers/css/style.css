@@ -99,6 +99,7 @@ body {
 
 .board__pixel-bg_active {
   background-color: red;
+  background-color: #007e0b;
 }
 
 .board__white-pixel_bg_inactive {
@@ -148,7 +149,7 @@ body {
 }
 
 .board__check_white__inner-round {
-  background-color: rgba(255, 166, 0, 0.986);
+  background-color: #c98301;
 }
 
 .board__check_black {
@@ -226,9 +227,13 @@ body {
   border: 2px solid #78048f;
 }
 
+.board__check_white {
+  border: 3px solid #c98301;
+}
+
 .Buttons__container {
   margin: 0 auto;
-  max-width: 500px;
+  max-width: 550px;
 }
 
 .Buttons__column {
@@ -247,16 +252,16 @@ body {
   font-size: 30px;
   height: 500px;
   -webkit-box-flex: 0;
-      -ms-flex: 0 0 25%;
-          flex: 0 0 25%;
+      -ms-flex: 0 0 20%;
+          flex: 0 0 20%;
   font-family: sans-serif;
   text-shadow: -2px -2px 4px black;
   color: white;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 18px;
   background-color: rgba(8, 124, 201, 0.849);
   border-radius: 15px;
-  padding: 5px;
+  padding: 8px;
   width: 200px;
   height: 55px;
   text-align: center;
@@ -264,6 +269,12 @@ body {
 
 .Buttons__button:hover {
   text-decoration: underline;
+}
+
+.btn-1 {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 32%;
+          flex: 0 0 32%;
 }
 
 .colorToMove {
@@ -286,10 +297,10 @@ body {
   text-shadow: -2px -2px 4px black;
   color: white;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 18px;
   background-color: rgba(8, 124, 201, 0.849);
   border-radius: 15px;
-  padding: 5px;
+  padding: 8px;
   width: 200px;
   height: 55px;
   text-align: center;

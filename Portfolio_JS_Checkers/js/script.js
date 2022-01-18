@@ -1,11 +1,8 @@
 
-//Добавить возможность вернуться на ход назад
 "use strict"
 
+
 const document_body_innerHTML_INIT = document.body.innerHTML;
-
-// console.log('document_body_innerHTML_INIT:', document_body_innerHTML_INIT);
-
 
 function arange(N1, N2 = null) {
 	let arr = [];
@@ -44,25 +41,20 @@ function setBoardPixels() {
 
 		// Заполняем новую строку клетками
 		for (let i = 0; i < 8; i++) {
-			// console.log('j = ', j, 'i = ', i);
 			let newPixel = document.createElement('div');
 			if (i % 2 == 0) {
 				newPixel.className = pixelClassesMass[j % 2];
-				// pixelCope = pix_mass[j % 2].cloneNode();
 			} else {
 				newPixel.className = pixelClassesMass[1 - j % 2];
-				// pixelCope = pix_mass[1 - j % 2].cloneNode();
 			}
 			newPixel.setAttribute("id", `${j}${i}`);
-
-			// console.log(newPixel);
 
 			boardRawElement.append(newPixel);
 		}
 		// Добавляем заполненную строку в конец
 		lastBoardColumnElement.append(boardRawElement);
 
-		// добавляем пустой контейнер для средующей строки клеток, если это не последняя строка
+		// Добавляем пустой контейнер для средующей строки клеток, если это не последняя строка
 		if (j < 7) {
 			let newBoardRawElement = document.createElement('div');
 			newBoardRawElement.className = 'board__raw';
@@ -83,8 +75,8 @@ function createWhiteChecker() {
 	whiteCheckerRound2.className = 'board__check_white__inner-round_2';
 	whiteCheckerRound.append(whiteCheckerRound2);
 	return whiteChecker;
-
 }
+
 function createBlackChecker() {
 	// Создаем черную пешку, которую будем клонировать в дальнейшем
 	const blackChecker = document.createElement('div');
@@ -94,33 +86,18 @@ function createBlackChecker() {
 	blackChecker.append(blackCheckerRound);
 	return blackChecker;
 }
+
 function setStartPositionWhite(numOfStartLines, numOfStartCheckers, whiteChecker, par_1, par_2, downsideColor = 'black', expMode = false) {
 	//  Расставляем белые шашки на места
 	let arrWhiteCheckers = new Array();
 
-	// for (let j of [1, 3]) {
-	// for (let i of [2]) {
-
-
-	//4 шашки вокруг
-	// for (let j of [7 - 2]) {
-	// 	for (let i of [7 - 3]) {
-
-
-	// for (let j of [7]) {
-	// 	for (let i of [2]) {
-	// if ((i == j)&&( i== 0)) continue;
-
-	// for (let j = 0; j < numOfStartLines; j++) {
-	// 	for (let i = 0; i < numOfStartCheckers; i++) {
-
-
-
 	let arrJ, arrI;
 	if (expMode) {
-		arrJ = [1, 2];
-		arrI = [4, 3];
+		//при необходимости можем расставить любую начальную позицию 
+		// arrJ = [1, 2];
+		// arrI = [4, 3];
 	} else {
+		// Позиция по умолчанию
 		arrJ = arange(numOfStartLines);
 		arrI = arange(numOfStartCheckers);
 	}
@@ -129,11 +106,8 @@ function setStartPositionWhite(numOfStartLines, numOfStartCheckers, whiteChecker
 		for (let i of arrI) {
 			if (j % 2 == 0) {
 				if (i % 2 == par_1) {
-					// console.log(j, i);
 					let pixel;
-
 					if (!expMode) {
-
 						if (downsideColor == 'white') pixel = document.getElementById(`${7 - j}${7 - i}`);
 						else if (downsideColor == 'black') pixel = document.getElementById(`${j}${i}`);
 						else {
@@ -141,23 +115,13 @@ function setStartPositionWhite(numOfStartLines, numOfStartCheckers, whiteChecker
 							throw new Error();
 						}
 					} else pixel = document.getElementById(`${j}${i}`);
-
-
-
 					let checker = whiteChecker.cloneNode(true);
-
 					pixel.append(checker);
 					arrWhiteCheckers.push(checker);
-					// console.log(checker);
-
-					// pixel.style.backgroundColor = 'red';
-					// pixel.style.backgroundColor = 'rgba(216, 0, 0, 0.397)';
 				}
 			} else {
-
 				if (i % 2 == par_2) {
 					let pixel;
-
 					if (!expMode) {
 						if (downsideColor == 'white') pixel = document.getElementById(`${7 - j}${7 - i}`);
 						else if (downsideColor == 'black') pixel = document.getElementById(`${j}${i}`);
@@ -166,47 +130,20 @@ function setStartPositionWhite(numOfStartLines, numOfStartCheckers, whiteChecker
 							throw new Error();
 						}
 					} else pixel = document.getElementById(`${j}${i}`);
-
-
 					let checker = whiteChecker.cloneNode(true);
-					// checker.onclick = function () { checker.style.background = 'red' };
-
 					pixel.append(checker);
 					arrWhiteCheckers.push(checker);
-
-
 				}
 			}
-
 		}
-
 	}
-	// * console.log('in in ', arrWhiteCheckers);
-	// console.log('in in ', arrWhiteCheckers);
-
 	return arrWhiteCheckers;
 }
-
-
 
 function setStartPositionBlack(numOfStartLines, numOfStartCheckers, blackChecker, par_1, par_2, downsideColor = 'black', expMode = false) {
 	// Расставляем черне шашки на места
 	let arrBlackCheckers = new Array();
 
-
-
-	// for (let j of [1, 6, 7 - 4]) {
-	// 	for (let i of [1, 2, 7 - 3]) {
-
-	//4 крестом
-	// for (let j of [3, 1]) {
-	// 	for (let i of [2, 4]) {
-
-	// for (let j of [3, 1, 6]) {
-	// for (let i of [2, 4, 3]) {
-
-	// for (let j = 0; j < numOfStartLines; j++) {
-	// 	for (let i = 0; i < numOfStartCheckers; i++) {
 	let arrJ, arrI;
 	if (expMode) {
 		arrJ = [0];
@@ -218,14 +155,10 @@ function setStartPositionBlack(numOfStartLines, numOfStartCheckers, blackChecker
 
 	for (let j of arrJ) {
 		for (let i of arrI) {
-
-			// console.log(j, i);
-
 			if (j % 2 == 0) {
 				if (i % 2 == par_1) {
 					let pixel;
 					if (!expMode) {
-
 						if (downsideColor == 'black') pixel = document.getElementById(`${7 - j}${7 - i}`);
 						else if (downsideColor == 'white') pixel = document.getElementById(`${j}${i}`);
 						else {
@@ -233,7 +166,6 @@ function setStartPositionBlack(numOfStartLines, numOfStartCheckers, blackChecker
 							throw new Error();
 						}
 					} else pixel = document.getElementById(`${j}${i}`);
-
 
 					let checker = blackChecker.cloneNode(true);
 					pixel.append(checker);
@@ -251,7 +183,6 @@ function setStartPositionBlack(numOfStartLines, numOfStartCheckers, blackChecker
 						}
 					} else pixel = document.getElementById(`${7 - j}${7 - i}`);
 
-
 					let checker = blackChecker.cloneNode(true);
 					pixel.append(checker);
 					arrBlackCheckers.push(checker);
@@ -262,19 +193,11 @@ function setStartPositionBlack(numOfStartLines, numOfStartCheckers, blackChecker
 	return arrBlackCheckers;
 }
 
-
-
-
-
 function unmarkPreviousPlayer(arrCheckers, arrWorkPixels, index, inactPixBordColor) {
 	// 1. Снимаем пометки клеток для предыдущего игрока и отнимаем у него возможность ходить
 	// 2. СНимаем соответствующие атрибуты клеток с предыдущего хода
 	let previousMovePixels = document.querySelectorAll(`[data-index-color = "${arrIndexColor[1 - index]}"`);
-	// console.log(previousMovePixels);
-
 	for (let lastMovePixel of previousMovePixels) {
-		// console.log('Это дамка', lastMovePixel.firstChild.hasAttribute('status'));
-
 		lastMovePixel.removeAttribute("data-index-color");
 		lastMovePixel.style.borderColor = inactPixBordColor;
 	}
@@ -289,7 +212,6 @@ function unmarkPreviousPlayer(arrCheckers, arrWorkPixels, index, inactPixBordCol
 }
 
 function markCurrentPlayer(blankPixel, overlookedPixel, index, actPixBordColor) {
-
 	// 1. Помечаем элементы, соответствующий клеткам, в которую походил и из которой походил текущий игрок. 
 	// 2. Добавляем этим клеткам соответствующий атрибут
 	blankPixel.style.borderColor = actPixBordColor;
@@ -301,9 +223,6 @@ function markCurrentPlayer(blankPixel, overlookedPixel, index, actPixBordColor) 
 
 function getFlagPossibilityToEat(arrCheckers, index) {
 	// Проверка возможности съесть шашку. Если есть возможность, вернуть true
-
-	// if (index == 1) console.log('hello, index = ', index, 'Это ход черных');
-	// if (index == 0) console.log('hello, index = ', index, 'Это ход белых');
 
 	for (let checker of arrCheckers) {
 		// if (checker.hasAttribute('id')){
@@ -320,45 +239,30 @@ function getFlagPossibilityToEat(arrCheckers, index) {
 				//рассматриваем пиксели в пределах доски
 				if ((0 <= newJ) && (newJ < 8) && (0 <= newI) && (newI < 8)) {
 					//проверка на наличие шашки в клетке (newJ, newI)
-					// console.log('asd', document.getElementById(`${newJ}${newI}`));
-
 					if (document.getElementById(`${newJ}${newI}`).hasChildNodes()) {
 						//Проверка, что шашка на (newJ, newI) - другого цвета
-						// console.log(j, i, index, document.getElementById(`${newJ}${newI}`).firstChild.classList);
-
 						if (document.getElementById(`${newJ}${newI}`).firstChild.classList.contains(`board__check_${arrIndexColor[1 - index]}`)) {
-							// console.log('это шашка другого цвета');
-
 							// Проверка на наличие пустой клетки за клеткой "pixelAnotherColor" 
 							let emptyPixJ = jOfPixel + 2 * j;
 							let emptyPixI = iOfPixel + 2 * i;
 							if ((0 <= emptyPixJ) && (emptyPixJ < 8) && (0 <= emptyPixI) && (emptyPixI < 8)) {
 								let PotentialEmptyPixel = document.getElementById(`${emptyPixJ}${emptyPixI}`);
-								// console.log('PotentialEmptyPixel:', PotentialEmptyPixel);
-
-								// if (Boolean(PotentialEaterPixel)){
 								if (!PotentialEmptyPixel.hasChildNodes()) {
 									return true;
-									// break markPossibilityToEat;
 								}
 							}
 						}
-						// }
 					}
 				}
 			}
 		}
-		// }
 	}
 	return false;
 }
 
 function getFlagPossibilityToEatForQueens(myQueens) {
 	let flagExp1 = false;
-	// let flagExp1 = true;
 	for (let checker of myQueens) {
-		// if (checker.hasAttribute('id')){
-
 		let color;
 		if (checker.getAttribute('status') == 'WhiteQueen') {
 			color = 'white';
@@ -377,18 +281,12 @@ function getFlagPossibilityToEatForQueens(myQueens) {
 					let newI = iOfPixel + r * i;
 					//рассматриваем пиксели в пределах доски
 					if ((0 <= newJ) && (newJ < 8) && (0 <= newI) && (newI < 8)) {
-						// if (flagExp1) console.log('asd', document.getElementById(`${newJ}${newI}`));
 						//проверка на наличие шашки в клетке (newJ, newI)
 						if (flagExp1) console.log('potential pixels:', document.getElementById(`${newJ}${newI}`), 'my Queen color:', color);
 						if (document.getElementById(`${newJ}${newI}`).hasChildNodes()) {
-							// if (flagExp1) console.log(j, i, index, document.getElementById(`${newJ}${newI}`).firstChild.classList);
-
 							//Проверка, что шашка на (newJ, newI) - шашка противника
 							let potentialEnemyChecker = document.getElementById(`${newJ}${newI}`).firstChild;
-							// if (flagExp1) console.log('potentialEnemyChecker.classList.contains(`board__check_${color}`):', potentialEnemyChecker);
 							if (flagExp1) console.log(`potentialEnemyChecker.classList.contains('board__check_${color}'):`, potentialEnemyChecker.classList.contains(`board__check_${color}`), '- Значит это шашка противника');
-
-
 							if (!potentialEnemyChecker.classList.contains(`board__check_${color}`)) {
 								// Проверка на наличие пустой клетки за найденной шашкой противника
 								if (flagExp1) console.log('это шашка противника', document.getElementById(`${newJ}${newI}`).firstChild);
@@ -412,24 +310,15 @@ function getFlagPossibilityToEatForQueens(myQueens) {
 	return false;
 }
 
-
-// let objActPixBordColor = { 'black': 'rgb(5, 255, 25)', 'white': 'rgb(255, 0, 0)' };
 let objActPixBordColor = { 'black': 'rgb(0, 173, 0)', 'white': 'rgb(255, 0, 0)' };
 let objButtonColorToNow = { 'black': 'Ход черных', 'white': 'Ход белых' };
 
 function rand100() { return Math.round(Math.random() * 100); }
 function nextMove(myCheckers, EnemyCheckers, index, arrWorkPixels, actPixBordColor, inactPixBordColor, downsideColor, myQueenCheckers = [], enemyQueenCheckers = [], moveNum = 0, StartMoveColor) {
-	// console.log('in func nexnmove index = ', index);
 	console.log('moveNum:', moveNum);
 
 	let CurrentColor = arrIndexColor[index];
 
-
-	// function someFunk(a, b, event) {
-	// 	console.log(a, b, event);
-	//   }
-
-	// // buttonNewGame.addEventListener('click', newGame.bind(), false);
 	let buttonColorToNow = document.querySelector('[name="colorToMove"]');
 
 	let flagPossibilityToEatEnemyChecker = false;
@@ -437,27 +326,20 @@ function nextMove(myCheckers, EnemyCheckers, index, arrWorkPixels, actPixBordCol
 
 	actPixBordColor = objActPixBordColor[CurrentColor];
 	buttonColorToNow.innerHTML = objButtonColorToNow[CurrentColor];
-	// }
-	// MarkCurrentPlayer(actPixBordColor, buttonColorToNow);
 
 	if (myCheckers.length == 0) {
 
 		if (CurrentColor == 'black') {
 			alert("Выиграли белые");
-			// unmarkPreviousPlayer(EnemyCheckers, arrWorkPixels, index, inactPixBordColor);
 			let flag = confirm("Начать новую игру?");
-			if (flag) PlayGame('black', downsideColor);
+			if (flag) PlayGame('black', downsideColor, colorWorkPixels);
 		} else {
 			alert("Выиграли черные");
-			// unmarkPreviousPlayer(EnemyCheckers, arrWorkPixels, index, inactPixBordColor);
 			let flag = confirm("Начать новую игру?");
-			if (flag) PlayGame('white', downsideColor);
+			if (flag) PlayGame('white', downsideColor, colorWorkPixels);
 		}
 
 	} else {
-
-
-
 		if (ExpMode) console.log(index, 'myQueenCheckers:', myQueenCheckers);
 
 		flagPossibilityToEatEnemyChecker = getFlagPossibilityToEat(myCheckers, index);
@@ -468,15 +350,10 @@ function nextMove(myCheckers, EnemyCheckers, index, arrWorkPixels, actPixBordCol
 			console.log(arrIndexColor[index], 'flagPossibilityToEatEnemyChecker:', flagPossibilityToEatEnemyChecker);
 		}
 
-		// todo
-		// todo flagPossibilityToEatEnemyChecker_forQueens = getFlagPossibilityToEatForQueens(myQueenCheckers, index);
-
 		//! Обработка нажатия на клетку, с которой хотят походить
 		for (let checker of myCheckers) {
 
-			// console.log(index, checker);
-
-			// Отметка цветом клетки и присвоение ей атрибута "data-index-color"
+			// Отмечаем эту клетку цветом и присваиваем ей атрибут "data-index-color"
 			checker.onclick = function (newActivePixel) {
 				newActivePixel = checker.parentElement;
 				for (let checker of myCheckers) {
@@ -487,33 +364,22 @@ function nextMove(myCheckers, EnemyCheckers, index, arrWorkPixels, actPixBordCol
 				}
 				newActivePixel.style.borderColor = actPixBordColor;
 
-				// pp
-				// if (index == 1) newActivePixel.style.borderColor = 'green';
 				newActivePixel.setAttribute("data-index-color", arrIndexColor[index]);
 			}
 		}
 
-		//! обработка клеток, куда хотят походить
+		//! обработка нажатия на клетку, куда хотят походить
 		for (let blankPixel of arrWorkPixels) {
-			let flagExpBlank = ExpMode;
 			blankPixel.onclick = function () {
-				let randNum;
-				if (flagExpBlank) {
-					randNum = rand100();
-					console.log('RANDOM NUMBER:', randNum);
-				}
 				let ID = blankPixel.getAttribute('id');
 				let jOfPixel = +ID[0];
 				let iOfPixel = +ID[1];
-				// console.log(ID, 'ID');
-				//Проверка на отсутствие шашки в данном пикселе
-				if (!blankPixel.hasChildNodes()) {
-					// console.log('blankPixel');
 
-					if (flagExpBlank) console.log(blankPixel, 'pixel doesn\'t hasChildNodes');
+				//Проверка на отсутствие шашки в данной клетке
+				if (!blankPixel.hasChildNodes()) {
 
 					// ! 1 случай
-					// ! Ход, на котором съедается  шашка, которая может быть съедена любой шашкой
+					// ! Ход, на котором съедается  шашка, которая может быть съедена любой шашкой (не обязательно дамкой)
 					for (let j of [-1, 1]) {
 						for (let i of [-1, 1]) {
 							//индексы рассматриваемого пикселя
@@ -521,87 +387,65 @@ function nextMove(myCheckers, EnemyCheckers, index, arrWorkPixels, actPixBordCol
 							let newI = iOfPixel + i;
 							//рассматриваем пиксели в пределах доски
 							if ((0 <= newJ) && (newJ < 8) && (0 <= newI) && (newI < 8)) {
-								// console.log(j, i, jOfPixel, iOfPixel, 'newJ:', newJ, 'newI:', newI);
-								// let pixelAnotherColor = document.getElementById(`${newJ}${newI}`);
 								let potentialEatenCheckerParent = document.getElementById(`${newJ}${newI}`);
-								if (document.getElementById(`${newJ}${newI}`).hasChildNodes()) {
-									// Проверка на наличие клетки соперника рядом с рассматриваемой клеткой "blankPixel" 	
-
+								//Если в клетке "potentialEatenCheckerParent" есть шашка
+								if (potentialEatenCheckerParent.hasChildNodes()) {
 									let potentialEatenChecker = potentialEatenCheckerParent.firstChild;
 									let flagNearIsEnemyChecker = potentialEatenChecker.classList.contains(`board__check_${arrIndexColor[1 - index]}`);
-									// Проверка наличия моей шашки за клеткой соперника, которая бы съела ее и попала в рассматриваемый пиксель
+									//Если шашка внутри клетки "potentialEatenCheckerParent" является шашкой противника
 									if (flagNearIsEnemyChecker) {
+										// Проверка наличия моей шашки за клеткой соперника, которая бы съела ее и попала в рассматриваемый пиксель
 										let newJ = jOfPixel + 2 * j;
 										let newI = iOfPixel + 2 * i;
-										// console.log(j, i, 'newJ:', newJ, 'newI:', newI);
 										let PotentialEaterPixel = document.getElementById(`${newJ}${newI}`);
-										// console.log('PotentialEaterPixel:', PotentialEaterPixel);
 										if (Boolean(PotentialEaterPixel)) {
+											//если клетка "PotentialEaterPixel" содержит шашку противника
 											if (PotentialEaterPixel.hasChildNodes()) {
-												//если эта клетка содержит мою шашку
 												let potentialEaterChecker = PotentialEaterPixel.firstChild;
 
 												if (PotentialEaterPixel.hasAttribute("data-index-color")) {
 
-													//Если шашка "PotentialEaterPixel" активна и она не является дамкой 
+													//Если клетка "PotentialEaterPixel" активна и шашка внутри нее не является дамкой (т.е. не имеет атрибута "status")
 													if ((PotentialEaterPixel.dataset.indexColor == arrIndexColor[index]) && (!potentialEaterChecker.hasAttribute('status'))) {
-														// console.log('potentialEaterChecker hasAttribute("data-index-color") = ', arrIndexColor[index]);
+														//перемещаем нашу шашку на новую клетку
 														blankPixel.append(potentialEaterChecker);
-														// potentialEatenCheckerParent.removeChild(potentialEatenChecker);
-
-														//убираем съеденную шашку с доски и из соответствующих массивов
+														
+														//убираем съеденную шашку с доски 
 														potentialEatenCheckerParent.innerHTML = '';
+														
+														//убираем съеденную шашку из соответствующих массивов, в которых она находилась 
+														//( т.е. из массива всех шашек противника или массива всех дамок противника, если съеденная шашка была дамкой)
 														EnemyCheckers.splice(EnemyCheckers.indexOf(potentialEatenChecker), 1)
 														if (potentialEatenChecker.hasAttribute('status')) enemyQueenCheckers.splice(enemyQueenCheckers.indexOf(potentialEatenChecker), 1)
 
-														//помечаем клетку цветом, куда походили (пометка №1)
-														//помечаем элементы, соответствующий клеткам, в которую походили и из которой походили(пометка №2)
-														// console.log('blankPixel, PotentialEaterPixel, index, actPixBordColor', blankPixel, PotentialEaterPixel, index, actPixBordColor);
-
-														//проверка, можно ли съесть вторую пешку этой же пешкой:
-														flagPossibilityToEatEnemyChecker = getFlagPossibilityToEat([potentialEaterChecker], index);
-
-														// console.log('flagPossibilityToEatEnemyChecker 1:', flagPossibilityToEatEnemyChecker);
-														//если можно, то передаем ход себе
+														//помечаем элементы, соответствующие клеткам, в которую походил и из которой походил данный игрок(пометка №2)
 														markCurrentPlayer(blankPixel, PotentialEaterPixel, index, actPixBordColor)
 
-														//Рассматриваем случай, что рожденная после съедения другой шашки дамка сможет съесть еще кого-нибудь
+														//проверка, можно ли съесть еще одну пешку этой же шашкой:
+														flagPossibilityToEatEnemyChecker = getFlagPossibilityToEat([potentialEaterChecker], index);
+														//если flagPossibilityToEatEnemyChecker == true, то передаем ход себе
+
+														//Рассматриваем случай, что наша шашка, съев другую шашку, стала дамкой и может съесть еще одну шашку
 														let flagPossibilityToEatEnemyCheckerForBornedQueen = false;
 														if (([0, 7].includes(jOfPixel)) && (!potentialEaterChecker.hasAttribute('status'))) {
-															// console.log(potentialEaterChecker);
+															//Изменяем внешний вид для новой дамки
 															dressQueen(potentialEaterChecker, CurrentColor);
+															//Добавляем новую дамку в массив всех дамок
 															myQueenCheckers.push(potentialEaterChecker);
+															//если новая дамка может съесть еще, то флаг "flagPossibilityToEatEnemyCheckerForBornedQueen" будет равен true
 															flagPossibilityToEatEnemyCheckerForBornedQueen = getFlagPossibilityToEatForQueens([blankPixel.firstChild], index);
-															// console.log('я съел шашку, стал дамкой и теперь могу съесть еще:',  flagPossibilityToEatEnemyCheckerForBornedQueen, blankPixel.firstChild);
-															// console.log(1, flagPossibilityToEatEnemyCheckerForBornedQueen);
 														}
-														if (flagExpBlank) console.log(2, flagPossibilityToEatEnemyCheckerForBornedQueen);
-
+														//Если данный игрок может съесть еще одну шашку противника
 														if ((flagPossibilityToEatEnemyChecker) || (flagPossibilityToEatEnemyCheckerForBornedQueen)) {
-															if (flagExpBlank) console.log(123);
-
-															// console.log(potentialEaterChecker, jOfPixel);
-															// console.log(2, myQueenCheckers);
-
 															nextMove(myCheckers, EnemyCheckers, index, arrWorkPixels, actPixBordColor, inactPixBordColor, downsideColor, myQueenCheckers, enemyQueenCheckers, moveNum + 1, StartMoveColor);
 														}
 														else {
-															// console.log('document.querySelectorAll(["data-index-color"]):', 
+															//Если никого больше съесть нельзя, то снимаем пометки клеток от предыдущего хода противника
 															unmarkPreviousPlayer(myCheckers, arrWorkPixels, index, inactPixBordColor);
-
-															// console.log(potentialEaterChecker, jOfPixel, 'jOfPixel in [0, 7]', jOfPixel in [0, 7]);
-															// if ([0, 7].includes(jOfPixel) && (!potentialEaterChecker.hasAttribute('status'))) {
-															// 	// console.log('in 2', potentialEaterChecker, jOfPixel);
-															// 	dressQueen(potentialEaterChecker, color);
-															// 		
-															// if (color == 'black') console.log('я съел шашку, стал дамкой и теперь могу съесть еще:',  getFlagPossibilityToEatForQueens([blankPixel.firstChild], index), blankPixel.firstChild);
-															// }
-
 															//передаем ход другому игроку
 															nextMove(EnemyCheckers, myCheckers, 1 - index, arrWorkPixels, actPixBordColor, inactPixBordColor, downsideColor, enemyQueenCheckers, myQueenCheckers, moveNum + 1, StartMoveColor);
 														}
 													}
-													// console.log('potentialEaterChecker hasAttribute("data-index-color") != ', arrIndexColor[index]);
 												}
 											}
 										}
@@ -610,75 +454,58 @@ function nextMove(myCheckers, EnemyCheckers, index, arrWorkPixels, actPixBordCol
 							}
 						}
 					}
-					// console.log('flagPossibilityToEatEnemyChecker:', flagPossibilityToEatEnemyChecker);
-
-
 					// ! 2 случай
-					// ! обычный ход без съедания шашек
-					// !Учет того, что нельзя ходить назад
+					// ! Обычный ход без съедания шашек
+					// ! Учет того, что нельзя ходить назад
 					if ((!flagPossibilityToEatEnemyChecker) && (!flagPossibilityToEatEnemyCheckerForQueens)) {
-						//todo	
-						// let jValue;
-						// if (downsideColor == 'white'){
-						// 	if (CurrentColor == 'black') jValue = 1;
-						// 	else jValue = -1;
-						// } else{
-						// 	if (CurrentColor == 'black') jValue = -1;
-						// 	else jValue = 1;
-						// }
+						let jValue;
+						if (downsideColor == 'white') {
+							if (CurrentColor == 'black') jValue = -1;
+							else jValue = 1;
+						} else {
+							if (CurrentColor == 'black') jValue = 1;
+							else jValue = -1;
+						}
 
-						for (let j of [-1, 1]) {
+						for (let j of [jValue]) {
 							for (let i of [-1, 1]) {
-								//индексы рассматриваемого пикселя
+								//индексы рассматриваемого пикселя, где, возможно, находится шашка данного игрока
 								let newJ = jOfPixel + j;
 								let newI = iOfPixel + i;
 
-								//рассматриваем пиксели в пределах доски
 								//Пиксель, из которого хочет походить данный игрок в пиксель "blankPixel" должен быть в пределах доски
 								if ((0 <= newJ) && (newJ < 8) && (0 <= newI) && (newI < 8)) {
-									// console.log(j, i, jOfPixel, iOfPixel, 'newJ:', newJ, 'newI:', newI);
 									//overlookedPixel - это предполагаемая клетка, которая имеет в себе шашку, 
-									//которой хотят походить в клетку "blankPixel" (ПРЕДПОЛОЖЕНИЕ №1)
-									// проверка истинности ПРЕДПОЛОЖЕНИЯ №1
-									// ! Здесь возможно ошибка. Было два условия:
-									// if ((getComputedStyle(overlookedPixel).borderColor == actPixBordColor) &&
-									// 	(overlookedPixel.dataset.indexColor == arrIndexColor[index])) {
 									let overlookedPixel = document.getElementById(`${newJ}${newI}`);
-									// console.log('overlookedPixel:', overlookedPixel);
-
+									//Если клетка "overlookedPixel" помечена, как активная (а, значит, в ней должна находиться шашка данного игрока)
 									if (overlookedPixel.dataset.indexColor == arrIndexColor[index]) {
-
+										//шашка, которой хочет походить данный игрок
 										let activeChecker = overlookedPixel.firstChild;
-										// console.log('activeChecker.hasAttribute("status"):', activeChecker.hasAttribute('status'));
-										// console.log('([0, 7].includes[jOfPixel]):', ([0, 7].includes(jOfPixel)), jOfPixel);
 
+										//случай, когда данный игрок походил шашкой на последнюю горизонталь и превратился в дамку
 										if (([0, 7].includes(jOfPixel)) && (!activeChecker.hasAttribute('status'))) {
-											// console.log(123, activeChecker);
 											dressQueen(activeChecker, CurrentColor);
 											myQueenCheckers.push(activeChecker)
 										}
-
-										// console.log(arrIndexColor[index], activeChecker, 'newJ = ', newJ, newI, jOfPixel);
-
-
+										//перемещаем шашку в новую клетку
 										blankPixel.append(activeChecker);
 
-										//помечаем клетку цветом, куда походили (пометка №1)
+										//помечаем цветом клетку, куда походили (пометка №1)
 										markCurrentPlayer(blankPixel, overlookedPixel, index, actPixBordColor);
-										// снимаем пометки №1 и №2 для предыдущего игрока
+										// снимаем пометки для предыдущего игрока
 										unmarkPreviousPlayer(myCheckers, arrWorkPixels, index, inactPixBordColor);
 										//передаем ход другому игроку
 										nextMove(EnemyCheckers, myCheckers, 1 - index, arrWorkPixels, actPixBordColor, inactPixBordColor, downsideColor, enemyQueenCheckers, myQueenCheckers, moveNum + 1, StartMoveColor);
 									}
-
 								}
 							}
 						}
 					}
-					//!3 случай
+					//! 3 случай
 					//! Обработка клеток, куда хотят походить ДАМКОЙ
+					// Идея: найти ближайшую шашку по четырем диагонялям. если она окажется дамкой данного игрока 
+					// и находится на расстоянии больше одной клетки от рассматриваемой клетки "blankPixel", то походить ей
 					if (!flagPossibilityToEatEnemyCheckerForQueens) {
-						// if (!flagPossibilityToEatEnemyChecker) {
 						for (let j of [-1, 1]) {
 							for (let i of [-1, 1]) {
 								forIndexK1: for (let k of [1, 2, 3, 4, 5, 6, 7]) {
@@ -687,120 +514,80 @@ function nextMove(myCheckers, EnemyCheckers, index, arrWorkPixels, actPixBordCol
 									let newI = iOfPixel + k * i;
 
 									if ((0 <= newJ) && (newJ < 8) && (0 <= newI) && (newI < 8)) {
-										//overlookedPixel - это предполагаемая клетка, которая имеет в себе дамку, 
-										//которой хотят походить в клетку "blankPixel")
+										// overlookedPixel - это предполагаемая клетка, которая имеет в себе дамку, 
+										// которой хотят походить в клетку "blankPixel")
 										let overlookedPixel = document.getElementById(`${newJ}${newI}`);
 
-										//найти бижайшую шашку по четырем диагонялям. если она дамка и дальше чем 1 клетка от  (jOfPixel, шOfPixel), то походить ей 
-										// console.log(arrIndexColor[index], overlookedPixel);
 
 										if (overlookedPixel.hasChildNodes()) {
+											// шашка, которой хотят походить
 											let potentialQueenChecker = overlookedPixel.firstChild;
+											// если эта шашка является дамкой и она является дамкой данного игрока
 											if (overlookedPixel.firstChild.hasAttribute('status') &&
 												overlookedPixel.firstChild.classList.contains(`board__check_${arrIndexColor[index]}`)) {
-
+												// если данный игрок хочет походить этой дамкой 
 												if ((overlookedPixel.style.borderColor = actPixBordColor) && (overlookedPixel.dataset.indexColor == arrIndexColor[index])) {
 													blankPixel.append(potentialQueenChecker);
 													markCurrentPlayer(blankPixel, overlookedPixel, index, actPixBordColor);
-													// снимаем пометки №1 и №2 для предыдущего игрока
+													// снимаем пометки для предыдущего игрока
 													unmarkPreviousPlayer(myCheckers, arrWorkPixels, index, inactPixBordColor);
-
-													//передаем ход другому игроку
+													// передаем ход другому игроку
 													nextMove(EnemyCheckers, myCheckers, 1 - index, arrWorkPixels, actPixBordColor, inactPixBordColor, downsideColor, enemyQueenCheckers, myQueenCheckers, moveNum + 1, StartMoveColor);
 												}
 											} else break forIndexK1;
-
 										}
 									} else break forIndexK1;
-									// if (overlookedPixel.hasAttribute('status'){
-									// console.log();
-									// }
 								}
 							}
 						}
 					}
 					// ! 4 случай
-					// ! Ход, на котором ДМАКА съедает шашку					
-					randNum = rand100();
+					// ! Ход, на котором ДМАКА съедает шашку
 					for (let j of [-1, 1]) {
 						for (let i of [-1, 1]) {
 							forIndexK2: for (let k of [1, 2, 3, 4, 5, 6]) {
-								// console.log(randNum, "blankPixel:", blankPixel);
-								let expFlag = ExpMode;
-								let flagExpInner = false;
-								// let flagExpInner = true;
-								expFlag = expFlag && flagExpInner;
-
 								let newJ = jOfPixel + k * j;
 								let newI = iOfPixel + k * i;
 								if ((0 <= newJ) && (newJ < 8) && (0 <= newI) && (newI < 8)) {
 
-									//клетка, на которой, возможно находится шашка противника, которую, возможно, съест дамка данного игрока
+									// клетка, на которой, возможно находится шашка противника, которую, возможно, съест дамка данного игрока
 									let potentialEatenCheckerParent = document.getElementById(`${newJ}${newI}`);
-									if (expFlag) console.log('potentialEatenCheckerParent:', potentialEatenCheckerParent);
 
 									if (potentialEatenCheckerParent.hasChildNodes()) {
+										// шашка внутри клетки "potentialEatenCheckerParent"
 										let potentialEatenChecker = potentialEatenCheckerParent.firstChild;
-										if (expFlag) console.log('potentialEatenChecker:', potentialEatenChecker);
+										// Если шашка potentialEatenChecker является шашкой противника
 										if (potentialEatenChecker.classList.contains(`board__check_${arrIndexColor[1 - index]}`)) {
-											if (expFlag) console.log('Клетка содержит шашку противника:');
-
-
-											// flagPossibilityToEatEnemyChecker = getFlagPossibilityToEatForQueens([potentialEatenCheckerParent.firstChild], index);
-
-											// console.log(arrIndexColor[index], 'flagPossibilityToEatEnemyChecker', flagPossibilityToEatEnemyChecker);
-											//Поиск возможной дамки данного игрока за шашкой противника
-											if (expFlag) console.log('arange(k + 1, 8):', arange(k + 1, 8), k + 1);
-
+											//Поиск потенциальной дамки данного игрока за шашкой противника "potentialEatenChecker"
 											for (let r of arange(k + 1, 8)) {
-												if (expFlag) console.log('potentialEatenChecker:', potentialEatenChecker);
 
 												let newJmyQueen = jOfPixel + r * j;
 												let newImyQueen = iOfPixel + r * i;
-												if (expFlag) console.log(newJmyQueen, newImyQueen);
-
+												// потенциальная дамка должна быть в пределах доски
 												if ((0 <= newJmyQueen) && (newJmyQueen < 8) && (0 <= newImyQueen) && (newImyQueen < 8)) {
+
+													// клетка, в которой может находиться дамка данного игрока
 													let myPossibleQueenCheckerParent = document.getElementById(`${newJmyQueen}${newImyQueen}`);
-													// console.log('blankPixel:', blankPixel);
-
-													if (expFlag) console.log('myPossibleQueenCheckerParent:', myPossibleQueenCheckerParent);
-
+													// проверка наличия шашки в этой клетке
 													if (myPossibleQueenCheckerParent.hasChildNodes()) {
 														let myPossibleQueenChecker = myPossibleQueenCheckerParent.firstChild;
-														if (expFlag) console.log('myPossibleQueenCheckerParent.style.borderColor:', myPossibleQueenCheckerParent.style.borderColor);
 
-														//Если эта шашка - дамка, и если она является шашкой данного игрока.
+														//Если эта шашка является дамкой, и если она является дамкой данного игрока.
 														if (myPossibleQueenChecker.hasAttribute('status') && (myPossibleQueenChecker.classList.contains(`board__check_${arrIndexColor[index]}`)) && (myPossibleQueenCheckerParent.style.borderColor == actPixBordColor)) {
-															if (expFlag) console.log('Клетка', myPossibleQueenCheckerParent, 'содержит мою дамку');
-
-
-															if (expFlag) console.log('Дамка съедает шашку');
-
+															//перемещаем дамку данного игрока, изменяем соответствующие массивы
 															blankPixel.append(myPossibleQueenChecker);
-															// pixelAnotherColor.removeChild(potentialEatenChecker);
 															potentialEatenCheckerParent.innerHTML = '';
 															if (potentialEatenChecker.hasAttribute('status')) enemyQueenCheckers.splice(enemyQueenCheckers.indexOf(potentialEatenChecker), 1)
-
-															//TODO проверить, нужно ли удалять: EnemyCheckers.splice(EnemyCheckers.indexOf(potentialEatenChecker), 1)
-															if (expFlag) console.log('EnemyCheckers.indexOf(potentialEatenChecker):', EnemyCheckers.indexOf(potentialEatenChecker));
 															EnemyCheckers.splice(EnemyCheckers.indexOf(potentialEatenChecker), 1)
-
+															// проверяем возможность съедания еще одной шашки этой дамкой
 															flagPossibilityToEatEnemyCheckerForQueens = getFlagPossibilityToEatForQueens([myPossibleQueenChecker], index);
-
-															if (expFlag) console.log(659, arrIndexColor[index], 'flagPossibilityToEatEnemyCheckerForQueens after eating:', flagPossibilityToEatEnemyCheckerForQueens);
-
-															//если можно, то передаем ход себе
+															//если это возможно, то передаем ход себе
 															markCurrentPlayer(blankPixel, myPossibleQueenCheckerParent, index, actPixBordColor)
-															//todo этот флаг работает неправильно
-															console.log(3, myQueenCheckers);
-
 															if (flagPossibilityToEatEnemyCheckerForQueens) {
 																nextMove(myCheckers, EnemyCheckers, index, arrWorkPixels, actPixBordColor, inactPixBordColor, downsideColor, myQueenCheckers, enemyQueenCheckers, moveNum + 1, StartMoveColor);
 															}
 															else {
-																// console.log('document.querySelectorAll(["data-index-color"]):', 
 																unmarkPreviousPlayer(myCheckers, arrWorkPixels, index, inactPixBordColor);
-																// console.log(potentialEaterChecker, jOfPixel, 'jOfPixel in [0, 7]', jOfPixel in [0, 7]);
 																//передаем ход другому игроку
 																nextMove(EnemyCheckers, myCheckers, 1 - index, arrWorkPixels, actPixBordColor, inactPixBordColor, downsideColor, enemyQueenCheckers, myQueenCheckers, moveNum + 1, StartMoveColor);
 															}
@@ -812,71 +599,32 @@ function nextMove(myCheckers, EnemyCheckers, index, arrWorkPixels, actPixBordCol
 									}
 								} else break forIndexK2;
 							}
-
-							// ! Ход, на котором съедается  шашка
-
-
 						}
-
 					}
 				}
-
 			}
 		}//! обработка клеток, куда хотят походить
 	}
 }
-function correctSizeOfCheckers(arrWhiteCheckers, arrBlackCheckers) {
-
-	// let flagModifySizeOfCheckers = false;
-	// let flagModifySizeOfCheckers = true;
-
-	// if (flagModifySizeOfCheckers){
-	let checkerWhite0 = document.querySelector('.board__check_white');
-	let pixelWhite0 = document.querySelector('.board__pixel_white');
-	let checkerWhiteWidth = parseFloat(getComputedStyle(checkerWhite0).width);
-	let pixelWhite0Width = parseFloat(getComputedStyle(pixelWhite0).width);
-	let pixelWhite0BorderWidth = parseFloat(getComputedStyle(pixelWhite0).borderWidth);
-	let indentChecker_corrected = (pixelWhite0Width - checkerWhiteWidth) / 2 - pixelWhite0BorderWidth;
-	console.log('checkerWhiteWidth:', checkerWhiteWidth, 'pixelWhite0Width:', pixelWhite0Width, 'pixelWhite0BorderWidth:', pixelWhite0BorderWidth, ' indentChecker_corrected:', indentChecker_corrected);
-
-	// console.log(23, arrWhiteCheckers.concat(arrBlackCheckers));
-
-	for (let checker of arrWhiteCheckers.concat(arrBlackCheckers)) {
-		checker.style.top = indentChecker_corrected + 'px';
-		checker.style.left = indentChecker_corrected + 'px';
-	}
-	// }
-}
 
 
 const arrIndexColor = ['white', 'black'];
-// const arrIndexColor = ['black', 'white'];
 const whiteChecker = createWhiteChecker();
 const blackChecker = createBlackChecker();
-const colorWorkPixels = 'black';
 const moveNumStart = 1;
 
 
 let arrWorkPixels;
 let par_1, par_2;
-// let arrWorkPixels, colorWorkPixels;
-
-
 let numOfStartLines = 3;
 let numOfStartCheckers = 8;
-// let numOfStartCheckers = 2;
-// let numOfStartLines = 1;
-// let indentChecker = 7.375; // см. значение "indentChecker_corrected" по флагу "flagModifySizeOfCheckers"
-
-
-
 let index;
 let startBoardPosition;
 let arrBlackPixels, arrWhitePixels;
 let arrWhiteCheckers, arrBlackCheckers;
 let actPixBordColor = 'rgb(255, 0, 0)', inactPixBordColor;
 
-//ставить true, если хотим исправлять ошибки или задавать свою стартовую позицию
+// ставить ExpMode = true, если хотим исправлять ошибки или задавать свою стартовую позицию
 const ExpMode = false;
 // const ExpMode = true;
 
@@ -884,16 +632,14 @@ let jTurning = { 'white': { 'white': 0, 'black': 7 }, 'black': { 'white': 7, 'bl
 let whiteQueenCheckers = [], blackQueenCheckers = [];
 
 
-function makeStartPosition(blackPixClassName, whitePixClassName, downsideColor, expMode = false) {
+function makeStartPosition(blackPixClassName, whitePixClassName, downsideColor, colorWorkPixels, expMode = false) {
 	document.body.innerHTML = '';
+	// Отрисовываем клетки доски
 	setBoardPixels();
+
 	arrBlackPixels = document.querySelectorAll('.' + blackPixClassName);
 	arrWhitePixels = document.querySelectorAll('.' + whitePixClassName);
-	// console.log('.' + blackPixClassName);
-
 	inactPixBordColor = getComputedStyle(arrWhitePixels[0]).borderColor;
-	// * console.log('arrBlackPixels:', arrBlackPixels);
-	// * console.log('arrWhitePixels:', arrWhitePixels);
 
 	if (colorWorkPixels == 'white') {
 		par_1 = 0;
@@ -902,7 +648,8 @@ function makeStartPosition(blackPixClassName, whitePixClassName, downsideColor, 
 		par_1 = 1;
 		par_2 = 0;
 	}
-
+	
+	// Расставляем шашки белых и черных, помещая их в массивы
 	arrBlackCheckers = setStartPositionBlack(numOfStartLines, numOfStartCheckers, blackChecker, par_1, par_2, downsideColor, expMode);
 	arrWhiteCheckers = setStartPositionWhite(numOfStartLines, numOfStartCheckers, whiteChecker, par_1, par_2, downsideColor, expMode);
 
@@ -911,20 +658,15 @@ function makeStartPosition(blackPixClassName, whitePixClassName, downsideColor, 
 	} else {
 		arrWorkPixels = arrBlackPixels;
 	}
+
 }
 
 function dressQueen(checker, color) {
 
 	if (color == 'black') checker.setAttribute('status', 'BlackQueen');
 	else checker.setAttribute('status', 'WhiteQueen');
-	// console.log('checker:', checker);
 	let color1 = getComputedStyle(checker.firstChild).backgroundColor;
-	// let color1 = 'green';
 	checker.removeChild(checker.firstChild);
-	// checker.style.cssText = `
-	// background-color: ${color1};
-	// //box-shadow: 0px 0px 0px 1.5px black inset;
-	// `;
 	checker.style.backgroundColor = `${color1}`;
 	checker.style.border = '2px solid white';
 }
@@ -947,48 +689,41 @@ function CheckinfForQueensAtStart(arrWhiteCheckers, arrBlackCheckers, jTurning, 
 	}
 }
 
-function newGame(StartMoveColor, downsideColor) {
-	console.log('newGame(StartMoveColor, downsideColor):', StartMoveColor, downsideColor);
-
+function newGame(StartMoveColor, downsideColor, colorWorkPixels) {
 	let flag = confirm("Начать новую игру?");
-	console.log('flag :', flag);
-	console.log('new pars:', StartMoveColor, downsideColor);
-
-	if (flag) PlayGame(StartMoveColor, downsideColor);
+	if (flag) PlayGame(StartMoveColor, downsideColor, colorWorkPixels);
 }
 
-function changeColor(StartMoveColor, downsideColor) {
-	console.log('StartMoveColor, downsideColor:', StartMoveColor, downsideColor);
+// Поменять цвет
+function changeColor(StartMoveColor, downsideColor, colorWorkPixels) {
 
 	let flag = confirm("Вы хотите сменить цвет?");
-	console.log('flag :', flag);
-	console.log('new pars:', arrIndexColor[1 - arrIndexColor.indexOf(StartMoveColor)], downsideColor);
-
-	if (flag) PlayGame(arrIndexColor[1 - arrIndexColor.indexOf(StartMoveColor)], downsideColor);
+	if (flag) PlayGame(arrIndexColor[1 - arrIndexColor.indexOf(StartMoveColor)], downsideColor, colorWorkPixels);
 }
 
+// Перевернуть доску
 function flipBoard(StartMoveColor, downsideColor) {
-	console.log('StartMoveColor, downsideColor:', StartMoveColor, downsideColor);
-
 	let flag = confirm("Вы хотите перевернуть доску?");
-	console.log('flag :', flag);
-	console.log('new pars:', StartMoveColor, arrIndexColor[1 - arrIndexColor.indexOf(downsideColor)]);
-
-	if (flag) PlayGame(StartMoveColor, arrIndexColor[1 - arrIndexColor.indexOf(downsideColor)]);
+	if (flag) PlayGame(StartMoveColor, arrIndexColor[1 - arrIndexColor.indexOf(downsideColor)], colorWorkPixels);
 }
 
-
-function PlayGame(StartMoveColor, downsideColor = 'white') {
+// Сменить цвет рабочих клеток
+function changeColorOfWorkPixels(StartMoveColor, downsideColor, colorWorkPixels) {
+	let flag = confirm("Вы хотите сменить цвет рабочих клеток?");
+	if (flag) PlayGame(StartMoveColor, downsideColor, arrIndexColor[1 - arrIndexColor.indexOf(colorWorkPixels)]);
+}
+// Начать игру
+function PlayGame(StartMoveColor, downsideColor = 'white', colorWorkPixels = 'white') {
 
 	let index = arrIndexColor.indexOf(StartMoveColor);
 	document.body.innerHTML = document_body_innerHTML_INIT; // Стираю все изменения в HTML из JS 
 
-	makeStartPosition('board__pixel_black', 'board__pixel_white', downsideColor, ExpMode);
-	//Смотрю, есть ли в стартовой позиции дамки
+	makeStartPosition('board__pixel_black', 'board__pixel_white', downsideColor, colorWorkPixels, ExpMode);
+	// Смотрю, есть ли в стартовой позиции дамки
 	if (ExpMode) CheckinfForQueensAtStart(arrWhiteCheckers, arrBlackCheckers, jTurning, downsideColor);
 
-	//Добавляю опции для пользователя
-	setupButtnos(StartMoveColor, downsideColor);
+	// Добавляю опции для пользователя
+	setupButtnos(StartMoveColor, downsideColor, colorWorkPixels);
 
 	if (StartMoveColor == 'black') nextMove(arrBlackCheckers, arrWhiteCheckers, index, arrWorkPixels, actPixBordColor, inactPixBordColor, downsideColor, blackQueenCheckers, whiteQueenCheckers, moveNumStart);
 	else nextMove(arrWhiteCheckers, arrBlackCheckers, index, arrWorkPixels, actPixBordColor, inactPixBordColor, downsideColor, whiteQueenCheckers, blackQueenCheckers, moveNumStart, StartMoveColor);
@@ -996,20 +731,30 @@ function PlayGame(StartMoveColor, downsideColor = 'white') {
 
 }
 
-
-function setupButtnos(StartMoveColor, downsideColor) {
+// Задаем действия при нажатии на кнопки
+function setupButtnos(StartMoveColor, downsideColor, colorWorkPixels) {
 	let buttonNewGame = document.querySelector('[name="new-game"]');
 	let buttonChangeColor = document.querySelector('[name="change-color"]');
+	let buttonChangeColorWorkPixels = document.querySelector('[name="change-color-work-pixels"]');
+	console.log(buttonChangeColorWorkPixels);
 	let buttonflipBoard = document.querySelector('[name="flip-board"]');
-	buttonNewGame.addEventListener('click', newGame.bind(null, StartMoveColor, downsideColor));
-	buttonChangeColor.addEventListener('click', changeColor.bind(null, StartMoveColor, downsideColor));
-	buttonflipBoard.addEventListener('click', flipBoard.bind(null, StartMoveColor, downsideColor));
+	buttonNewGame.addEventListener('click', newGame.bind(null, StartMoveColor, downsideColor, colorWorkPixels));
+	buttonChangeColor.addEventListener('click', changeColor.bind(null, StartMoveColor, downsideColor, colorWorkPixels));
+	buttonflipBoard.addEventListener('click', flipBoard.bind(null, StartMoveColor, downsideColor, colorWorkPixels));
+	buttonChangeColorWorkPixels.addEventListener('click', changeColorOfWorkPixels.bind(null, StartMoveColor, downsideColor, colorWorkPixels));
 }
 
-
+// цвет игрока, который ходит первым
 let StartMoveColor = 'white';
 // let StartMoveColor = 'black';
+
+// цвет игрока внизу
 let downsideColor = 'white';
 // let downsideColor = 'black';
-PlayGame(StartMoveColor, downsideColor);
+
+// цвет рабочих клеток
+// let colorWorkPixels = 'white';
+let colorWorkPixels = 'black';
+
+PlayGame(StartMoveColor, downsideColor, colorWorkPixels);
 

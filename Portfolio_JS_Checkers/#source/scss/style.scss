@@ -1,4 +1,4 @@
-@import "nullstyle.scss";
+@import "_nullstyle.scss";
 
 @mixin pixel($margin_top, $margin_left, $p_size, $color) {
 	width: $p_size;
@@ -29,9 +29,11 @@ $pixel_size: ($size_board) / 8;
 	background-color: green;
 	width: 100px;
 }
+
 .board {
 	&__pixel-bg_active {
 		background-color: red;
+		background-color: rgb(0, 126, 11);
 	}
 	&__white-pixel_bg_inactive {
 		background-color: white;
@@ -41,7 +43,8 @@ $pixel_size: ($size_board) / 8;
 	}
 	$pixel_size_modif: $pixel_size * 0.7;
 	$round-color: rgb(168, 197, 2);
-	$inner-bg-color-white: rgba(255, 166, 0, 0.986);
+	// $inner-bg-color-white: rgba(255, 166, 0, 0.986);
+	$inner-bg-color-white: rgb(201, 131, 1);;
 	$white-checker-color: rgb(72, 69, 78);
 	$black-checker-color: black;
 	$koef: 0.75;
@@ -120,15 +123,22 @@ $pixel_size: ($size_board) / 8;
 	}
 }
 
+.board__check_white{
+	border: 3px solid rgb(201, 131, 1);
+	// &__inner-round{
+		// box-shadow: none;
+	// }
+}
+
 @mixin textStyle {
 	font-family: sans-serif;
 	text-shadow: -2px -2px 4px black;
 	color: white;
 	font-weight: 700;
-	font-size: 20px;
+	font-size: 18px;
 	background-color: rgba(8, 124, 201, 0.849);
 	border-radius: 15px;
-	padding: 5px;
+	padding: 8px;
 	width: 200px;
 	height: 55px;
 	text-align: center;
@@ -137,7 +147,7 @@ $pixel_size: ($size_board) / 8;
 .Buttons {
 	&__container {
 		margin: 0 auto;
-		max-width: 500px;
+		max-width: 550px;
 
 	}
 	
@@ -151,7 +161,7 @@ $pixel_size: ($size_board) / 8;
 	&__button {
 		font-size: 30px;
 		height: 500px;
-		flex: 0 0 25%;
+		flex: 0 0 20%;
 		&:hover{
 			text-decoration: underline;
 		}
@@ -159,6 +169,9 @@ $pixel_size: ($size_board) / 8;
 	}
 }
 
+.btn-1{
+	flex: 0 0 32%;
+}
 
 .colorToMove {
 	width: 300px;
@@ -170,4 +183,10 @@ $pixel_size: ($size_board) / 8;
 		align-items: center;
 		@include textStyle;
 	}
+}
+
+// .Buttons__column:first-child p{
+.clr-work-pix{
+	// background-color: red;
+	// font-size: 15px;
 }
