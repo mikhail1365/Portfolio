@@ -231,8 +231,8 @@ h1, h2, h3, h4, h5, h6 {
   padding: 8px 0;
   outline: 1px solid black;
   background-color: rgba(67, 215, 235, 0.719);
-  -webkit-transition-duration: 0.5s;
-          transition-duration: 0.5s;
+  -webkit-transition-duration: 1s;
+          transition-duration: 1s;
 }
 
 .orange_box, .hover-func, .inside-menu__element:hover, .menu__element:hover {
@@ -386,7 +386,6 @@ header:before {
     position: fixed;
     top: -100%;
     left: 20px;
-    width: 100%;
     padding: 0 0 0 0;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -394,9 +393,10 @@ header:before {
             flex-direction: column;
     width: 45%;
     z-index: 500;
-    background-color: #fcffe3;
+    background-color: #fb0a0a;
   }
   .menu__element {
+    width: 49%;
     background-color: #fcffe3;
     height: auto;
     padding: 5px;
@@ -485,15 +485,16 @@ header:before {
     display: none;
   }
   .menu__row-active {
-    height: 20px;
+    max-height: 200px;
     top: 58px;
-    padding: 0 0 70px 0;
+    width: 90%;
+    overflow: scroll;
   }
   .header-active {
-    margin-bottom: 120px;
+    margin-bottom: 70px;
   }
   .header-active:before {
-    background-color: #d83232;
+    background-color: #fb0a0a;
     height: 200px;
   }
 }
@@ -640,6 +641,8 @@ header:before {
   }
   .right-navbar__img-1,
   .right-navbar__img-3 {
+    background-size: contain;
+    background-position: top;
     float: none;
     width: auto;
   }

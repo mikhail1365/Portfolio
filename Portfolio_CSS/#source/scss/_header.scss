@@ -7,7 +7,7 @@
 	font-style: normal;
 }
 
-$time-delay-top: 0.5s;
+$time-delay-top: 1s;
 
 $inside-menu-bgcolor: rgba(67, 215, 235, 0.719);
 .inside-menu {
@@ -147,7 +147,8 @@ $height-head: 55px;
 }
 
 $bef-col: rgba(251, 10, 10, 0.728);
-$bef-col-opaque: rgba(251, 10, 10, 0.728);
+$bef-col-opaque: rgb(251, 10, 10);
+
 header:before {
 	content: "";
 	position: absolute;
@@ -169,26 +170,31 @@ header:before {
 $pbot: 70px;
 
 @media (max-width: 767px) {
+
 	.container {
 		min-width: 100%;
 	}
 	.menu {
 		height: 100%;
 		&__row {
+			// height: 100%;
+			// overflow: auto;
+			// @include bord(5px);
 			transition-duration: 1s;
 			position: fixed;
 			top: -100%;
 			left: 20px;
-			width: 100%;
 			padding: 0 0 0 0;
 		
 			flex-direction: column;
 			width: 45%;
 			z-index: 500;
-			background-color: $bgColor;
+			// background-color: $bgColor;
+			background-color: $bef-col-opaque;
 		}
 
 		&__element {
+			width: 49%;
 			&:last-child {
 			}
 			background-color: $bgColor;
@@ -288,15 +294,19 @@ $pbot: 70px;
 	}
 
 	.menu__row-active {
-		height: 20px;
+		// height: 20px;
+		// flex-grow: 1;
+		max-height: 200px;
 		top: $height-head + 3px;
-		padding: 0 0 $pbot 0;
+		// padding: 0 0 $pbot - 70px 0;
+		width:90%;
+		overflow: scroll;
 	}
 	.header-active {
-
-		margin-bottom: $pbot + 50px;
+		// height: 200px;
+		margin-bottom: $pbot;
 		&:before{
-			background-color: rgb(216, 50, 50);
+			background-color: $bef-col-opaque;
 			height: 200px;
 		}
 	}
