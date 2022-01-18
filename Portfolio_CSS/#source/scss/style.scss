@@ -12,6 +12,7 @@ $bgColor: rgb(252, 255, 227);
 @mixin bord($width: 1px, $color: black) {
 	border: $width solid $color;
 }
+
 body {
 	background-color: $bgColor;
 	font-size: 20px;
@@ -24,7 +25,6 @@ body {
 .container {
 	margin: 0 auto;
 	max-width: 1400px;
-	// @include bord;
 }
 
 @media (max-width: 1200px) {
@@ -353,9 +353,6 @@ $img_wid: 130px;
 		display: block;
 	}
 
-	.right-navbar__item-1,
-	.right-navbar__item-3 {
-	}
 	.right-navbar__img-1,
 	.right-navbar__img-3 {
 		float: none;
