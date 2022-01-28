@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/style.css">
+	<title>Document</title>
+</head>
+
+<body>
+	<div class="wrapper" id="app">
+		<div class="head">Мои заметки</div>
+		<div class="card center"
+			@click="addingNoteAfterEscaping($event), closeOpenedEditings($event), ZeroColorText($event)"
+			@keydown.esc="closeShownNotes(), closeAddingWindow()">
+			<div class="container">
+				<div class="search-notes" >
+					<input class="input-cl" placeholder="Поиск заметок" v-model="searchForNotes">
+				</div>
+
+				<div class="list-notes-head head-style">Список заметок</div>
+			
+				<ul class="list" v-if="notesHeads.length !== 0">
+					<li :id='getID(ind)' @click="showNote(ind, $event), addingNoteAfterCreatingNewNote()"
+						:class="{'h-300': ind===shownNoteInd, 'spaceEvenly': ind===shownNoteInd}" class="list__item"
+						v-for="(myNoteHead, ind) in notesHeads">
+						<div :class="{'noteHead': ind===shownNoteInd}" style="font-size: 24px">
+							({{ ind + 1}}) <strong>{{myNoteHead}}</strong>
+						</div>
+
+
+						<div class="short-content" notetype="shortContent" style="font-size: 22px">
+							{{NotesShortContent[ind]}}</div>
+
+						<textarea :tabindex='ind' fieldtype="showingNote" shown-note="true" v-if="ind===shownNoteInd"
+							type="text" class="editing-note" v-model="notesContents[ind]"
+							@blur="makeColorTextPossible()" @focus="makeColorTextImpossible()"
+							@keyup="changeShownInputValue(ind), saveChangedNotes(ind)"
+							@keydown="changeShownInputValueRepeat($event, ind)">
+
+
+					</textarea>
+						<button class="rmv-button" @click="removeNote(ind, $event)"
+							:class="{'rmv-button-shownnote': ind===shownNoteInd}"> Удалить</button>
+					</li>
+					<hr>
+				</ul>
+
+				<div class="new-note">
+					<div class="new-note__icon">
+						<div class="icon-transition" @click="changeFlagState('editingFieldActive'),  closeShownNotes()">
+							<img class="" src="img/plus.png">
+						</div>
+					</div>
+					<div class="new-note__text head-style">Создать новую заметку</div>
+				</div>
+
+				<div v-if="flags.editingFieldActive" class="form-control">
+					<textarea fieldtype="adding" type="text" class="editing-note" @keydown.esc="addNote"
+						v-model="inputValue" placeholder="Начните ввод">
+					</textarea>
+				</div>
+
+				<button class="button-add" @click="addNote"><p :class="{colorRed: flags.col_red}">Добавить</p>
+				</button>
+
+			</div>
+		</div>
+	</div>
+
+	<script src="https://unpkg.com/vue@next"></script>
+	<script src="js/script.js"></script>
+</body>
+
+</html>
